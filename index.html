@@ -3,458 +3,552 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nicolas Brian Quiroz, MD — Independent Researcher in Plasma Control & Advanced Materials</title>
+  <title>Nicolas Brian Quiroz, MD — Plasma Control, Advanced Materials & BEP Systems</title>
   <meta name="description" content="MD-trained inventor developing the Ψ_universe toroidal attractor for tokamak plasma control, supported by real EAST #41195 validation, open-source tools, and the U.S. patent-pending Q108D platform."/>
+  <meta name="author" content="Nicolas Brian Quiroz, MD"/>
+  <meta property="og:title" content="Nicolas Brian Quiroz, MD — Independent Researcher"/>
+  <meta property="og:description" content="Plasma control, advanced materials, fractal HRV systems, and the BEP framework."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    :root { --bg: #0a0e17; --text: #e0f2fe; --accent: #00f0ff; --accent-dark: #00b4cc; --card: #111827; --gradient: linear-gradient(135deg, #0ea5e9, #00f0ff, #7c3aed); }
-    [data-theme="light"] { --bg: #f0f9ff; --text: #0f172a; --card: #ffffff; --gradient: linear-gradient(135deg, #7c3aed, #00f0ff, #0ea5e9); }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.7; min-height:100vh; transition:all 0.5s ease; }
-    nav.tabs { position:fixed; top:0; left:0; right:0; background:rgba(17,24,39,0.85); backdrop-filter:blur(12px); padding:1rem 0; display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; z-index:1000; border-bottom:1px solid rgba(0,240,255,0.2); }
-    nav.tabs button { background:transparent; border:1px solid var(--accent); color:var(--accent); font-size:1.15rem; padding:0.8rem 1.8rem; cursor:pointer; border-radius:999px; transition:all 0.4s; font-weight:600; }
-    nav.tabs button:hover, nav.tabs button.active { background:var(--accent); color:#000; box-shadow:0 0 30px rgba(0,240,255,0.5); border-color:transparent; }
-    header.hero { background:var(--gradient); color:white; text-align:center; padding:10rem 2rem 6rem; position:relative; min-height:55vh; overflow:visible; margin-top:100px; }
-    h1 { font-size:4.2rem; font-weight:800; margin-bottom:1rem; line-height:1.1; }
-    .subtitle { font-size:1.45rem; max-width:820px; margin:0 auto; opacity:0.95; }
-    .theme-toggle { position:absolute; top:2rem; right:2rem; background:rgba(255,255,255,0.15); border:none; color:white; font-size:1.6rem; padding:1rem; border-radius:50%; cursor:pointer; backdrop-filter:blur(8px); transition:all 0.4s; }
-    .theme-toggle:hover { transform:scale(1.15); background:rgba(255,255,255,0.3); }
-    main.container { max-width:1200px; margin:0 auto 5rem; padding:0 2rem; }
-    .tab-content { display:none; }
-    .tab-content.active { display:block; animation:fadeUp 1s ease-out; }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:none; } }
-    .card { background:var(--card); border:1px solid rgba(0,240,255,0.15); border-radius:20px; padding:3rem; margin-bottom:2.5rem; box-shadow:0 15px 40px rgba(0,0,0,0.4); transition:all 0.4s; }
-    .card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,240,255,0.15); }
-    h2 { color:var(--accent); margin-bottom:1.5rem; font-size:2.8rem; font-weight:800; }
-
-    /* Oren's polish additions */
-    .evidence-box {
-      background: rgba(0,240,255,0.05);
-      padding: 1.5rem;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    :root {
+      --bg: #07090f;
+      --bg-2: #0c111b;
+      --text: #e8f4ff;
+      --muted: #8aa0b8;
+      --accent: #3cefff;
+      --accent-2: #7c5cff;
+      --accent-3: #ff4fd8;
+      --card: rgba(14, 20, 34, 0.72);
+      --line: rgba(60, 239, 255, 0.16);
+      --glow: 0 0 40px rgba(60, 239, 255, 0.18);
+      --radius: 22px;
+      --nav-h: 76px;
     }
-    .evidence-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0,240,255,0.12);
-      background: rgba(0,240,255,0.08);
+    [data-theme="light"] {
+      --bg: #f3f7fb;
+      --bg-2: #ffffff;
+      --text: #0b1220;
+      --muted: #4b6076;
+      --card: rgba(255,255,255,0.78);
+      --line: rgba(12, 90, 120, 0.14);
+      --glow: 0 0 30px rgba(12, 140, 180, 0.08);
     }
-    ul.preprints li { margin: 1.2rem 0; font-size: 1.1rem; }
-    ul li i { color: var(--accent); margin-right: 1rem; font-size: 1.2rem; width: 1.8rem; text-align: center; }
-    button:focus-visible, a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 8px;
-    }
-
-    /* App cards grid */
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .app-card {
-      background: rgba(0,240,255,0.04);
-      border: 1px solid rgba(0,240,255,0.15);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-    .app-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0,240,255,0.12);
-      border-color: var(--accent);
-    }
-    .app-card .app-icon {
-      font-size: 2.4rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    .app-card h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 0.6rem;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      background: var(--bg);
       color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .app-card p {
-      font-size: 1rem;
-      opacity: 0.85;
+    #plasma {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.55;
+    }
+    [data-theme="light"] #plasma { opacity: 0.28; }
+    .grain {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .wrap { position: relative; z-index: 2; }
+
+    nav.tabs {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.4rem; gap: 1rem; z-index: 1000;
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      backdrop-filter: blur(18px) saturate(1.4);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.75rem; min-width: 180px;
+      font-weight: 700; letter-spacing: 0.04em; font-size: 0.92rem;
+    }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: conic-gradient(from 120deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+      display: grid; place-items: center; box-shadow: var(--glow);
+    }
+    .brand-mark span {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--bg);
+      display: grid; place-items: center; font-size: 0.7rem; color: var(--accent);
+    }
+    .nav-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
+    nav.tabs button {
+      background: transparent; border: 1px solid transparent; color: var(--muted);
+      font-family: inherit; font-size: 0.86rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.48rem 0.9rem; cursor: pointer; border-radius: 999px; font-weight: 600;
+      transition: 0.25s ease;
+    }
+    nav.tabs button:hover { color: var(--text); border-color: var(--line); }
+    nav.tabs button.active {
+      color: #041016; background: var(--accent); border-color: var(--accent);
+      box-shadow: var(--glow);
+    }
+    [data-theme="light"] nav.tabs button.active { color: #041016; }
+    .nav-right { display: flex; align-items: center; gap: 0.6rem; }
+    .theme-toggle {
+      background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+      color: var(--text); width: 42px; height: 42px; border-radius: 50%;
+      cursor: pointer; font-size: 1rem; transition: 0.25s;
+    }
+    .theme-toggle:hover { transform: rotate(-16deg) scale(1.06); border-color: var(--accent); }
+
+    header.hero {
+      min-height: 88vh; padding: calc(var(--nav-h) + 4.5rem) 1.5rem 5rem;
+      display: grid; place-items: center; text-align: center; position: relative;
+    }
+    .hero-inner { max-width: 980px; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 1.4rem;
+    }
+    .kicker::before, .kicker::after {
+      content: ""; width: 28px; height: 1px; background: var(--accent); opacity: 0.7;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3.1rem, 7vw, 6.2rem);
+      font-weight: 600; line-height: 0.95; letter-spacing: -0.02em;
       margin-bottom: 1.2rem;
-      line-height: 1.6;
     }
-    .app-card .app-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.2rem;
+    h1 em {
+      font-style: italic; background: linear-gradient(120deg, var(--accent), #fff, var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    .app-card .app-tag {
-      font-size: 0.78rem;
-      padding: 0.3rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(0,240,255,0.1);
-      color: var(--accent);
+    .subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.35rem); color: var(--muted);
+      max-width: 740px; margin: 0 auto 2.2rem; font-weight: 300;
+    }
+    .hero-cta { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.85rem 1.45rem; border-radius: 999px; text-decoration: none;
+      font-weight: 700; font-size: 0.95rem; transition: 0.25s ease; border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--accent); color: #041016; }
+    .btn-primary:hover { box-shadow: 0 0 28px rgba(60,239,255,0.45); transform: translateY(-2px); }
+    .btn-ghost { border-color: var(--line); color: var(--text); background: rgba(255,255,255,0.03); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-violet { background: linear-gradient(135deg, #6d3cff, #9b5cff); color: #fff; }
+    .btn-violet:hover { box-shadow: 0 0 28px rgba(124,92,255,0.4); transform: translateY(-2px); }
+
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+      max-width: 980px; margin: 3.5rem auto 0;
+    }
+    .stat {
+      padding: 1.15rem 1rem; border: 1px solid var(--line); border-radius: 16px;
+      background: color-mix(in srgb, var(--card) 80%, transparent);
+    }
+    .stat b { display: block; font-size: 1.55rem; color: var(--accent); letter-spacing: -0.03em; }
+    .stat span { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    main.container { max-width: 1160px; margin: 0 auto 5rem; padding: 0 1.4rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: rise 0.7s ease; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 2.2rem 2.2rem 2rem;
+      margin-bottom: 1.4rem; backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+      opacity: 0.45;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: var(--text); margin-bottom: 1rem; font-size: clamp(1.8rem, 3vw, 2.55rem);
       font-weight: 600;
-      border: 1px solid rgba(0,240,255,0.2);
     }
-    .app-card .app-links {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .app-card .app-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .app-link-primary {
-      background: var(--accent);
-      color: #000;
-    }
-    .app-link-primary:hover {
-      box-shadow: 0 0 20px rgba(0,240,255,0.4);
-    }
-    .app-link-secondary {
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
-      background: transparent;
-    }
-    .app-link-secondary:hover {
-      background: rgba(0,240,255,0.1);
-    }
+    h2 .dot { color: var(--accent); }
+    p.lead { color: var(--muted); margin-bottom: 1.4rem; }
 
-    /* Research repo list */
-    .repo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.2rem;
-      margin-top: 1.5rem;
+    .evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .evidence-box {
+      background: rgba(60,239,255,0.04); padding: 1.5rem 1.3rem; border-radius: 16px;
+      text-align: left; cursor: pointer; border: 1px solid var(--line);
+      transition: 0.28s ease; min-height: 100%;
     }
+    .evidence-box:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--glow); }
+    .evidence-box i { font-size: 1.45rem; color: var(--accent); margin-bottom: 0.85rem; display: block; }
+    .evidence-box strong { display: block; margin-bottom: 0.35rem; font-size: 1.05rem; }
+    .evidence-box p { color: var(--muted); font-size: 0.95rem; }
+
+    .domain-list { list-style: none; display: grid; gap: 0.7rem; }
+    .domain-list li {
+      display: flex; align-items: center; gap: 0.9rem;
+      padding: 0.85rem 1rem; border-radius: 14px; border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+    .domain-list i { color: var(--accent); width: 1.4rem; text-align: center; }
+
+    ul.preprints { list-style: none; }
+    ul.preprints li { margin: 0.55rem 0; }
+    ul.preprints a, .repo-item, .card a { color: var(--text); }
+    ul.preprints a { text-decoration: none; display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.2rem; border-bottom: 1px solid var(--line); }
+    ul.preprints a:hover { color: var(--accent); }
+    ul li i { color: var(--accent); width: 1.5rem; text-align: center; }
+
+    .app-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+    .app-card {
+      background: rgba(60,239,255,0.035); border: 1px solid var(--line);
+      border-radius: 18px; padding: 1.5rem; transition: 0.28s ease;
+    }
+    .app-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--glow); }
+    .app-card.featured { border-color: rgba(124,92,255,0.45); background: rgba(124,92,255,0.07); }
+    .app-icon { font-size: 1.7rem; color: var(--accent); margin-bottom: 0.7rem; }
+    .app-card h3 { font-size: 1.22rem; margin-bottom: 0.45rem; }
+    .app-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .app-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .app-tag {
+      font-size: 0.72rem; padding: 0.22rem 0.65rem; border-radius: 999px;
+      background: rgba(60,239,255,0.08); color: var(--accent); font-weight: 600;
+      border: 1px solid var(--line); letter-spacing: 0.03em;
+    }
+    .app-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .app-links a {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.88rem; font-weight: 700; text-decoration: none;
+    }
+    .app-link-primary { background: var(--accent); color: #041016; }
+    .app-link-secondary { border: 1px solid var(--accent); color: var(--accent); }
+
+    .repo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1rem; }
     .repo-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.2rem;
-      border-radius: 12px;
-      background: rgba(0,240,255,0.04);
-      border: 1px solid rgba(0,240,255,0.1);
-      text-decoration: none;
-      color: var(--text);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      display: flex; gap: 0.9rem; padding: 1.05rem; border-radius: 14px;
+      background: rgba(60,239,255,0.035); border: 1px solid var(--line);
+      text-decoration: none; transition: 0.25s ease;
     }
-    .repo-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0,240,255,0.1);
-      border-color: var(--accent);
+    .repo-item:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .repo-item i { color: var(--accent); font-size: 1.25rem; margin-top: 0.2rem; }
+    .repo-item strong { display: block; margin-bottom: 0.2rem; }
+    .repo-item span { color: var(--muted); font-size: 0.88rem; }
+
+    .patent-list, .social-list { list-style: none; display: grid; gap: 0.9rem; }
+    .patent-list li, .social-list li {
+      padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(255,255,255,0.02);
     }
-    .repo-item i {
-      font-size: 1.6rem;
-      color: var(--accent);
-      margin-top: 0.15rem;
-      flex-shrink: 0;
+    .social-list a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .social-list a:hover { text-decoration: underline; }
+
+    footer {
+      text-align: center; padding: 3.2rem 1rem 2.4rem; color: var(--muted);
+      border-top: 1px solid var(--line);
     }
-    .repo-item strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-bottom: 0.25rem;
-    }
-    .repo-item span {
-      font-size: 0.9rem;
-      opacity: 0.75;
-      line-height: 1.4;
+    footer .sig {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--text); margin-bottom: 0.4rem;
     }
 
-    footer { text-align:center; padding:4rem 1rem; color:#64748b; border-top:1px solid rgba(0,240,255,0.1); }
-    @media (max-width:768px) { header.hero { padding:9rem 1.5rem 5rem; margin-top:90px; } h1 { font-size:3.4rem; } }
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px;
+    }
+
+    @media (max-width: 920px) {
+      .stats, .evidence-grid, .app-grid, .repo-grid { grid-template-columns: 1fr 1fr; }
+      nav.tabs { height: auto; flex-wrap: wrap; padding: 0.7rem 0.8rem; }
+      :root { --nav-h: 118px; }
+      .brand { display: none; }
+    }
+    @media (max-width: 640px) {
+      .stats, .evidence-grid, .app-grid, .repo-grid { grid-template-columns: 1fr; }
+      .card { padding: 1.35rem; }
+      h1 { font-size: 3rem; }
+    }
   </style>
 </head>
 <body>
+  <canvas id="plasma"></canvas>
+  <div class="grain"></div>
+  <div class="wrap">
+    <nav class="tabs" aria-label="Primary">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span>Ψ</span></div>
+        <span>QUIROZ LAB</span>
+      </div>
+      <div class="nav-pills">
+        <button data-tab="home" class="active">Home</button>
+        <button data-tab="research">Research</button>
+        <button data-tab="apps">Apps</button>
+        <button data-tab="preprints">Preprints</button>
+        <button data-tab="book">Books</button>
+        <button data-tab="patents">Patents</button>
+        <button data-tab="social">Connect</button>
+      </div>
+      <div class="nav-right">
+        <button class="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </nav>
 
-  <nav class="tabs">
-    <button data-tab="home" class="active">Home</button>
-    <button data-tab="research">Research</button>
-    <button data-tab="apps">Apps</button>
-    <button data-tab="preprints">Preprints</button>
-    <button data-tab="book">Book</button>
-    <button data-tab="patents">Patents</button>
-    <button data-tab="social">Social</button>
-  </nav>
-
-  <header class="hero">
-    <button class="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
-    <h1>Nicolas Brian Quiroz, MD</h1>
-    <p class="subtitle">Independent researcher and inventor working on plasma control, advanced materials, and fractal HRV systems.</p>
-  </header>
-
-  <main class="container">
-
-    <!-- HOME -->
-    <section id="home" class="tab-content active">
-      <div class="card">
-        <h2>Key Evidence</h2>
-        <p style="margin-bottom:1.5rem; opacity:0.85;">Current work includes real tokamak validation, open-source implementation, and patent-pending simulation platforms for long-horizon control.</p>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem;">
-          <a href="https://doi.org/10.5281/zenodo.18939068" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
-            <div class="evidence-box">
-              <i class="fas fa-flask" style="font-size:2.5rem; color:var(--accent); margin-bottom:1rem;"></i>
-              <p><strong>Real EAST #41195 Validation</strong><br>Ψ_universe attractor outperforms classical methods on actual tokamak data</p>
-            </div>
-          </a>
-          <a href="https://github.com/BEPframework/psi-universe-attractor" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
-            <div class="evidence-box">
-              <i class="fas fa-code-branch" style="font-size:2.5rem; color:var(--accent); margin-bottom:1rem;"></i>
-              <p><strong>Open-Source on Zenodo & GitHub</strong><br>Full code, benchmarks, and Lyapunov proof freely available</p>
-            </div>
-          </a>
-          <a href="#" onclick="switchTab('patents'); return false;" style="text-decoration:none;color:inherit;">
-            <div class="evidence-box">
-              <i class="fas fa-lightbulb" style="font-size:2.5rem; color:var(--accent); margin-bottom:1rem;"></i>
-              <p><strong>U.S. Patent-Pending</strong><br>Q108D simulation platform with control-assisted latent-space stabilization</p>
-            </div>
-          </a>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="kicker">Independent Research · IZ LLC</div>
+        <h1>Nicolas Brian<br><em>Quiroz, MD</em></h1>
+        <p class="subtitle">Plasma control, advanced materials, and fractal physiology — translating toroidal attractor theory into open tools, validated systems, and patent-pending platforms.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary" onclick="switchTab('research'); return false;">Explore the research</a>
+          <a href="#" class="btn btn-violet" onclick="switchTab('apps'); return false;">ECHO SIGNATURE™</a>
+          <a href="#" class="btn btn-ghost" onclick="switchTab('social'); return false;">Collaborate</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>EAST #41195</b><span>Live tokamak validation</span></div>
+          <div class="stat"><b>19</b><span>Zenodo preprints</span></div>
+          <div class="stat"><b>3</b><span>U.S. filings pending</span></div>
+          <div class="stat"><b>Open</b><span>Code, proofs, tools</span></div>
         </div>
       </div>
+    </header>
 
-      <div class="card">
-        <h2>My Approach</h2>
-        <p>My work focuses on practical, evidence-oriented systems that translate theory into usable tools.</p>
-        <p style="margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
-          <a href="#" onclick="switchTab('research'); return false;" style="display:inline-block;padding:0.9rem 2rem;background:var(--accent);color:#000;border-radius:999px;text-decoration:none;font-weight:bold;">View Research →</a>
-          <a href="#" onclick="switchTab('apps'); return false;" style="display:inline-block;padding:0.9rem 2rem;border:2px solid var(--accent);color:var(--accent);border-radius:999px;text-decoration:none;font-weight:bold;">Explore Apps →</a>
-          <a href="#" onclick="switchTab('apps'); return false;" style="display:inline-block;padding:0.9rem 2rem;background:#7c3aed;color:#fff;border-radius:999px;text-decoration:none;font-weight:bold;">ECHO SIGNATURE&trade; →</a>
-          <a href="#" onclick="switchTab('social'); return false;" style="display:inline-block;padding:0.9rem 2rem;border:2px solid var(--accent);color:var(--accent);border-radius:999px;text-decoration:none;font-weight:bold;">Connect</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- RESEARCH -->
-    <section id="research" class="tab-content">
-      <div class="card">
-        <h2>Core Research Domains</h2>
-        <ul>
-          <li><i class="fas fa-atom"></i> Tokamak plasma control & attractor-based stability modeling</li>
-          <li><i class="fas fa-heartbeat"></i> Fractal physiology & HRV signal processing</li>
-          <li><i class="fas fa-shield-virus"></i> Multifunctional composite design architecture</li>
-          <li><i class="fas fa-network-wired"></i> BEP extensions and predictive systems</li>
-          <li><i class="fas fa-mobile-screen"></i> Digital health innovation</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Ψ_universe Attractor Library v2.0</h2>
-        <p>Modular Python library implementing the Ψ_universe toroidal attractor filter. Validated on real EAST #41195 tokamak data with full benchmark suite.</p>
-        <p><a href="https://github.com/BEPframework/psi-universe-attractor" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:1rem 0;padding:0.8rem 1.6rem;background:var(--accent);color:#000;border-radius:999px;text-decoration:none;font-weight:bold;">View on GitHub →</a></p>
-        <p><a href="https://doi.org/10.5281/zenodo.18939068" target="_blank" rel="noopener noreferrer">Zenodo • DOI: 10.5281/zenodo.18939068 (March 10, 2026)</a></p>
-      </div>
-      <div class="card">
-        <h2>Open-Source Research Repositories</h2>
-        <p style="margin-bottom:0.5rem; opacity:0.85;">Libraries and frameworks published under the BEPframework organization on GitHub.</p>
-        <div class="repo-grid">
-          <a href="https://github.com/BEPframework/psi-universe-attractor" target="_blank" rel="noopener noreferrer" class="repo-item">
-            <i class="fas fa-wave-square"></i>
-            <div>
-              <strong>psi-universe-attractor</strong>
-              <span>Modular Python implementation of the Ψ_universe attractor filter — validated on real EAST #41195 data</span>
-            </div>
-          </a>
-          <a href="https://github.com/BEPframework/tasd-core" target="_blank" rel="noopener noreferrer" class="repo-item">
-            <i class="fas fa-cube"></i>
-            <div>
-              <strong>tasd-core</strong>
-              <span>TASD Core Framework — Toroidal-Attractor Signal Dynamics engine</span>
-            </div>
-          </a>
-          <a href="https://github.com/BEPframework/tasd-framework" target="_blank" rel="noopener noreferrer" class="repo-item">
-            <i class="fas fa-cubes"></i>
-            <div>
-              <strong>tasd-framework</strong>
-              <span>TASD Unified Framework — Toroidal-Attractor Signal Dynamics (open-source release)</span>
-            </div>
-          </a>
-          <a href="https://github.com/BEPframework/toroidal-dynamics-toolkit" target="_blank" rel="noopener noreferrer" class="repo-item">
-            <i class="fas fa-circle-nodes"></i>
-            <div>
-              <strong>toroidal-dynamics-toolkit</strong>
-              <span>Modular Python toolkit for dynamic toroidal modulation in frequency-domain signal processing</span>
-            </div>
-          </a>
+    <main class="container">
+      <section id="home" class="tab-content active">
+        <div class="card">
+          <h2>Key evidence<span class="dot">.</span></h2>
+          <p class="lead">Current work includes real tokamak validation, open-source implementation, and patent-pending simulation platforms for long-horizon control.</p>
+          <div class="evidence-grid">
+            <a href="https://doi.org/10.5281/zenodo.18939068" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+              <div class="evidence-box">
+                <i class="fas fa-flask"></i>
+                <strong>Real EAST #41195 validation</strong>
+                <p>Ψ_universe attractor outperforms classical methods on actual tokamak data.</p>
+              </div>
+            </a>
+            <a href="https://github.com/BEPframework/psi-universe-attractor" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;">
+              <div class="evidence-box">
+                <i class="fas fa-code-branch"></i>
+                <strong>Open-source on Zenodo & GitHub</strong>
+                <p>Full code, benchmarks, and Lyapunov proof freely available.</p>
+              </div>
+            </a>
+            <a href="#" onclick="switchTab('patents'); return false;" style="text-decoration:none;color:inherit;">
+              <div class="evidence-box">
+                <i class="fas fa-lightbulb"></i>
+                <strong>U.S. patent-pending</strong>
+                <p>Q108D simulation platform with control-assisted latent-space stabilization.</p>
+              </div>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <h2>Foundation</h2>
-        <p>MD (Universidad Autónoma de Guadalajara) + Chemistry background (Fresno State) + surgical internship. Independent researcher developing practical technologies under IZ LLC.</p>
-      </div>
-    </section>
-
-    <!-- APPS -->
-    <section id="apps" class="tab-content">
-      <div class="card">
-        <h2>Interactive Apps & Tools</h2>
-        <p style="margin-bottom:2rem; opacity:0.85;">Browser-based research instruments and interactive simulations — no installation required. Built for exploration, education, and scientific communication.</p>
-
-        <div class="app-grid">
-
-          <div class="app-card">
-            <div class="app-icon"><i class="fas fa-atom"></i></div>
-            <h3>String Theory Cosmos v2.0</h3>
-            <p>Deterministic toy model of string/M-theory and cosmology with Ψuniverse fractal dynamics, live analysis dashboard, parameter sweeps, and exportable data.</p>
-            <div class="app-tags">
-              <span class="app-tag">String Theory</span>
-              <span class="app-tag">Ψuniverse</span>
-              <span class="app-tag">HTML</span>
-            </div>
-            <div class="app-links">
-              <a href="https://github.com/BEPframework/string-theory-cosmos" target="_blank" rel="noopener noreferrer" class="app-link-primary"><i class="fab fa-github"></i> GitHub</a>
-            </div>
+        <div class="card">
+          <h2>Approach<span class="dot">.</span></h2>
+          <p class="lead">Practical, evidence-oriented systems that translate theory into usable instruments — for physicists, clinicians, educators, and research partners.</p>
+          <div class="hero-cta" style="justify-content:flex-start;">
+            <a href="#" class="btn btn-primary" onclick="switchTab('research'); return false;">View research</a>
+            <a href="#" class="btn btn-ghost" onclick="switchTab('apps'); return false;">Explore apps</a>
+            <a href="#" class="btn btn-violet" onclick="switchTab('apps'); return false;">ECHO SIGNATURE™</a>
           </div>
-
-          <div class="app-card">
-            <div class="app-icon"><i class="fas fa-sun"></i></div>
-            <h3>Q216D Tokamak Simulation</h3>
-            <p>TASD-enhanced interactive 3D plasma visualization with ultra-precise energy transition control for tokamak research.</p>
-            <div class="app-tags">
-              <span class="app-tag">Tokamak</span>
-              <span class="app-tag">3D Plasma</span>
-              <span class="app-tag">TASD</span>
-            </div>
-            <div class="app-links">
-              <a href="https://github.com/BEPframework/q216d-tokamak-simulation" target="_blank" rel="noopener noreferrer" class="app-link-primary"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-
-          <div class="app-card">
-            <div class="app-icon"><i class="fas fa-flask-vial"></i></div>
-            <h3>BEP Field Lab</h3>
-            <p>Interactive research tool for testing Belonging–Energy–Prediction field dynamics with uploaded CSV/Excel data.</p>
-            <div class="app-tags">
-              <span class="app-tag">BEP Framework</span>
-              <span class="app-tag">Data Analysis</span>
-              <span class="app-tag">HTML</span>
-            </div>
-            <div class="app-links">
-              <a href="https://github.com/BEPframework/bep-field-lab" target="_blank" rel="noopener noreferrer" class="app-link-primary"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-
-          <div class="app-card" style="border-color: rgba(124,58,237,0.4); background: rgba(124,58,237,0.05);">
-            <div class="app-icon"><i class="fas fa-fingerprint" style="color:#7c3aed;"></i></div>
-            <h3>ECHO SIGNATURE&trade;</h3>
-            <p>A human potential assessment platform grounded in BEP Field Theory — measuring Belonging, Energy, and Prediction dynamics. Generates bilingual archetype profiles with radar chart visualization and PDF export. Built for educators, clinicians, and researchers.</p>
-            <div class="app-tags">
-              <span class="app-tag" style="color:#a78bfa; border-color:rgba(124,58,237,0.3); background:rgba(124,58,237,0.1);">BEP Field Theory</span>
-              <span class="app-tag" style="color:#a78bfa; border-color:rgba(124,58,237,0.3); background:rgba(124,58,237,0.1);">Human Potential</span>
-              <span class="app-tag" style="color:#a78bfa; border-color:rgba(124,58,237,0.3); background:rgba(124,58,237,0.1);">EN / ES</span>
-              <span class="app-tag" style="color:#a78bfa; border-color:rgba(124,58,237,0.3); background:rgba(124,58,237,0.1);">Production</span>
-            </div>
-            <div class="app-links">
-              <a href="mailto:BEPframework@nicolasquirozmd.com?subject=ECHO%20SIGNATURE%20Inquiry" class="app-link-primary" style="background:#7c3aed; color:#fff;"><i class="fas fa-envelope"></i> Contact for Access</a>
-            </div>
-          </div>
-
         </div>
+      </section>
 
-        <p style="margin-top:2.5rem; text-align:center;">
-          <a href="https://github.com/BEPframework" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:bold; font-size:1.1rem;">
-            View all repositories on GitHub →
-          </a>
-        </p>
-      </div>
-    </section>
+      <section id="research" class="tab-content">
+        <div class="card">
+          <h2>Core research domains<span class="dot">.</span></h2>
+          <ul class="domain-list">
+            <li><i class="fas fa-atom"></i> Tokamak plasma control & attractor-based stability modeling</li>
+            <li><i class="fas fa-heartbeat"></i> Fractal physiology & HRV signal processing</li>
+            <li><i class="fas fa-shield-virus"></i> Multifunctional composite design architecture</li>
+            <li><i class="fas fa-network-wired"></i> BEP extensions and predictive systems</li>
+            <li><i class="fas fa-mobile-screen"></i> Digital health innovation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Ψ_universe Attractor Library v2.0<span class="dot">.</span></h2>
+          <p class="lead">Modular Python library implementing the Ψ_universe toroidal attractor filter. Validated on real EAST #41195 tokamak data with a full benchmark suite.</p>
+          <p>
+            <a class="btn btn-primary" href="https://github.com/BEPframework/psi-universe-attractor" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> View on GitHub</a>
+          </p>
+          <p style="margin-top:1rem;color:var(--muted);">Zenodo · DOI: <a href="https://doi.org/10.5281/zenodo.18939068" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">10.5281/zenodo.18939068</a> (March 10, 2026)</p>
+        </div>
+        <div class="card">
+          <h2>Open-source repositories<span class="dot">.</span></h2>
+          <p class="lead">Libraries and frameworks published under the BEPframework organization on GitHub.</p>
+          <div class="repo-grid">
+            <a href="https://github.com/BEPframework/psi-universe-attractor" target="_blank" rel="noopener noreferrer" class="repo-item">
+              <i class="fas fa-wave-square"></i>
+              <div><strong>psi-universe-attractor</strong><span>Modular Python implementation of the Ψ_universe attractor filter — validated on real EAST #41195 data</span></div>
+            </a>
+            <a href="https://github.com/BEPframework/tasd-core" target="_blank" rel="noopener noreferrer" class="repo-item">
+              <i class="fas fa-cube"></i>
+              <div><strong>tasd-core</strong><span>TASD Core Framework — Toroidal-Attractor Signal Dynamics engine</span></div>
+            </a>
+            <a href="https://github.com/BEPframework/tasd-framework" target="_blank" rel="noopener noreferrer" class="repo-item">
+              <i class="fas fa-cubes"></i>
+              <div><strong>tasd-framework</strong><span>TASD Unified Framework — Toroidal-Attractor Signal Dynamics</span></div>
+            </a>
+            <a href="https://github.com/BEPframework/toroidal-dynamics-toolkit" target="_blank" rel="noopener noreferrer" class="repo-item">
+              <i class="fas fa-circle-nodes"></i>
+              <div><strong>toroidal-dynamics-toolkit</strong><span>Modular toolkit for dynamic toroidal modulation in frequency-domain signal processing</span></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Foundation<span class="dot">.</span></h2>
+          <p>MD (Universidad Autónoma de Guadalajara) + chemistry background (Fresno State) + surgical internship. Independent researcher developing practical technologies under IZ LLC.</p>
+        </div>
+      </section>
 
-    <!-- PREPRINTS -->
-    <section id="preprints" class="tab-content">
-      <div class="card">
-        <h2>Featured Preprints</h2>
-        <ul class="preprints">
-          <li><a href="https://doi.org/10.5281/zenodo.18939068" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> Ψ_universe Attractor Library v2.0 – Real EAST #41195 Validation (March 10, 2026)</a></li>
-          <li><a href="https://doi.org/10.5281/zenodo.18928047" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> TASD Core Framework (March 2026)</a></li>
-          <li><a href="https://doi.org/10.5281/zenodo.18926912" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> Q216D Tokamak Simulation Platform (March 2026)</a></li>
-          <li><a href="https://doi.org/10.5281/zenodo.18926748" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> TASD Unified Framework (March 2026)</a></li>
-          <li><a href="https://doi.org/10.5281/zenodo.18926038" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> Toroidal Dynamics Toolkit (March 2026)</a></li>
-          <li><a href="https://doi.org/10.5281/zenodo.18776055" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> When Care Becomes Control (2026)</a></li>
-        </ul>
-        <p style="margin-top:2rem; text-align:center;">
-          <a href="https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Quiroz%2C%20Nicolas%20Brian%22&l=list&p=1&s=20&sort=newest" 
-             target="_blank" rel="noopener noreferrer" 
-             style="color:var(--accent); font-weight:bold; font-size:1.1rem;">
-            View all 19 preprints on Zenodo →
-          </a>
-        </p>
-        <p>Full ORCID: <a href="https://orcid.org/0009-0003-8431-0048" target="_blank" rel="noopener noreferrer">0009-0003-8431-0048</a></p>
-      </div>
-    </section>
+      <section id="apps" class="tab-content">
+        <div class="card">
+          <h2>Interactive apps & tools<span class="dot">.</span></h2>
+          <p class="lead">Browser-based research instruments and interactive simulations — no installation required. Built for exploration, education, and scientific communication.</p>
+          <div class="app-grid">
+            <div class="app-card">
+              <div class="app-icon"><i class="fas fa-atom"></i></div>
+              <h3>String Theory Cosmos v2.0</h3>
+              <p>Deterministic toy model of string/M-theory and cosmology with Ψuniverse fractal dynamics, live analysis dashboard, parameter sweeps, and exportable data.</p>
+              <div class="app-tags">
+                <span class="app-tag">String Theory</span>
+                <span class="app-tag">Ψuniverse</span>
+                <span class="app-tag">HTML</span>
+              </div>
+              <div class="app-links">
+                <a href="https://github.com/BEPframework/string-theory-cosmos" target="_blank" rel="noopener noreferrer" class="app-link-primary"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+            <div class="app-card">
+              <div class="app-icon"><i class="fas fa-sun"></i></div>
+              <h3>Q216D Tokamak Simulation</h3>
+              <p>TASD-enhanced interactive 3D plasma visualization with ultra-precise energy transition control for tokamak research.</p>
+              <div class="app-tags">
+                <span class="app-tag">Tokamak</span>
+                <span class="app-tag">3D Plasma</span>
+                <span class="app-tag">TASD</span>
+              </div>
+              <div class="app-links">
+                <a href="https://github.com/BEPframework/q216d-tokamak-simulation" target="_blank" rel="noopener noreferrer" class="app-link-primary"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+            <div class="app-card">
+              <div class="app-icon"><i class="fas fa-flask-vial"></i></div>
+              <h3>BEP Field Lab</h3>
+              <p>Interactive research tool for testing Belonging–Energy–Prediction field dynamics with uploaded CSV/Excel data.</p>
+              <div class="app-tags">
+                <span class="app-tag">BEP Framework</span>
+                <span class="app-tag">Data Analysis</span>
+                <span class="app-tag">HTML</span>
+              </div>
+              <div class="app-links">
+                <a href="https://github.com/BEPframework/bep-field-lab" target="_blank" rel="noopener noreferrer" class="app-link-primary"><i class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+            <div class="app-card featured">
+              <div class="app-icon" style="color:#9b7cff;"><i class="fas fa-fingerprint"></i></div>
+              <h3>ECHO SIGNATURE™</h3>
+              <p>A human potential assessment platform grounded in BEP Field Theory — measuring Belonging, Energy, and Prediction dynamics. Generates bilingual archetype profiles with radar chart visualization and PDF export.</p>
+              <div class="app-tags">
+                <span class="app-tag">BEP Field Theory</span>
+                <span class="app-tag">Human Potential</span>
+                <span class="app-tag">EN / ES</span>
+                <span class="app-tag">Production</span>
+              </div>
+              <div class="app-links">
+                <a href="mailto:BEPframework@nicolasquirozmd.com?subject=ECHO%20SIGNATURE%20Inquiry" class="app-link-primary" style="background:#7c5cff;color:#fff;"><i class="fas fa-envelope"></i> Contact for access</a>
+              </div>
+            </div>
+          </div>
+          <p style="margin-top:1.8rem; text-align:center;">
+            <a href="https://github.com/BEPframework" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:700;">View all repositories on GitHub →</a>
+          </p>
+        </div>
+      </section>
 
-    <!-- BOOK, PATENTS, SOCIAL -->
-    <section id="book" class="tab-content">
-      <div class="card">
-        <h2>THE FOURTH FIELD (2026)</h2>
-        <p style="opacity:0.85; margin-bottom:1rem;"><em>Belonging, Energy, Prediction — and Artificial Intelligence</em></p>
-        <p>What happens when artificial intelligence enters the deepest architecture of the human mind? Building on the BEP Principle — Belonging, Energy, and Prediction — this book examines AI not as a simple threat or savior, but as a mirror, amplifier, and structural partner to human consciousness.</p>
-        <p style="margin-top:1rem;">Blending medicine, neuroscience, psychology, predictive processing, ethics, and philosophy, <em>The Fourth Field</em> explores how AI may reshape relationships, education, medicine, law, governance, and identity — and asks one urgent question: will AI deepen human fragmentation, or help humanity reclaim coherence?</p>
-        <p><a href="https://amzn.to/4u2o4Dp" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem; display:inline-block; margin-top:1rem;">Buy on Amazon →</a></p>
-      </div>
-      <div class="card">
-        <h2>THE BEP PRINCIPLE (2025)</h2>
-        <p style="opacity:0.85; margin-bottom:1rem;"><em>How the Brain Chooses Story Over Truth (and When It Doesn't)</em></p>
-        <p>Independently published • ISBN 979-8273171619</p>
-        <p style="margin-top:1rem;">Why do intelligent people believe falsehoods? Why do societies prefer comforting stories over uncomfortable truths? At its core lies the BEP model — Belonging, Energy, and Prediction — a synthesis of neuroscience, psychology, and social science revealing how truth-seeking is not our natural state but a conditional luxury. When energy is depleted or belonging is threatened, the brain defaults to coherence over accuracy.</p>
-        <p style="margin-top:1rem;">Drawing from medicine, education, and technology, Dr. Quiroz explores how modern life manipulates these defaults — and offers a roadmap for designing classrooms, clinics, platforms, and communities that restore the conditions for epistemic courage.</p>
-        <p><a href="https://a.co/d/0a0EOrI9" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem; display:inline-block; margin-top:1rem;">Buy on Amazon →</a></p>
-      </div>
-    </section>
+      <section id="preprints" class="tab-content">
+        <div class="card">
+          <h2>Featured preprints<span class="dot">.</span></h2>
+          <ul class="preprints">
+            <li><a href="https://doi.org/10.5281/zenodo.18939068" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> Ψ_universe Attractor Library v2.0 – Real EAST #41195 Validation (March 10, 2026)</a></li>
+            <li><a href="https://doi.org/10.5281/zenodo.18928047" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> TASD Core Framework (March 2026)</a></li>
+            <li><a href="https://doi.org/10.5281/zenodo.18926912" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> Q216D Tokamak Simulation Platform (March 2026)</a></li>
+            <li><a href="https://doi.org/10.5281/zenodo.18926748" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> TASD Unified Framework (March 2026)</a></li>
+            <li><a href="https://doi.org/10.5281/zenodo.18926038" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> Toroidal Dynamics Toolkit (March 2026)</a></li>
+            <li><a href="https://doi.org/10.5281/zenodo.18776055" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-lines"></i> When Care Becomes Control (2026)</a></li>
+          </ul>
+          <p style="margin-top:1.6rem; text-align:center;">
+            <a href="https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Quiroz%2C%20Nicolas%20Brian%22&l=list&p=1&s=20&sort=newest" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:700;">View all 19 preprints on Zenodo →</a>
+          </p>
+          <p style="margin-top:0.8rem;">Full ORCID: <a href="https://orcid.org/0009-0003-8431-0048" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">0009-0003-8431-0048</a></p>
+        </div>
+      </section>
 
-    <section id="patents" class="tab-content">
-      <div class="card">
-        <h2>Patent-Pending Inventions</h2>
-        <ul>
-          <li><i class="fas fa-lightbulb"></i> <strong>Q108D Tokamak Simulation Platform</strong><br>Control-assisted latent-space stabilization for energy transition management — Provisional filed Jan 2026 (non-provisional April 2026)</li>
-          <li><i class="fas fa-lightbulb"></i> Multifunctional Composite Material — <a href="https://patents.google.com/patent/US20260022228A1/en" target="_blank" rel="noopener noreferrer">US20260022228A1</a> (filed July 18, 2024)</li>
-          <li><i class="fas fa-lightbulb"></i> Method and System for Heart Rate Variability Analysis Using Fractal and Quantum-Like Dynamics — U.S. Application No. 19/228,748 (filed June 5, 2025)</li>
-        </ul>
-        <p>All inventions filed under Nicolas B. Quiroz, MD • U.S. applications pending</p>
-      </div>
-    </section>
+      <section id="book" class="tab-content">
+        <div class="card">
+          <h2>The Fourth Field (2026)<span class="dot">.</span></h2>
+          <p class="lead"><em>Belonging, Energy, Prediction — and Artificial Intelligence</em></p>
+          <p>What happens when artificial intelligence enters the deepest architecture of the human mind? Building on the BEP Principle — Belonging, Energy, and Prediction — this book examines AI not as a simple threat or savior, but as a mirror, amplifier, and structural partner to human consciousness.</p>
+          <p style="margin-top:1rem; color:var(--muted);">Blending medicine, neuroscience, psychology, predictive processing, ethics, and philosophy, <em>The Fourth Field</em> explores how AI may reshape relationships, education, medicine, law, governance, and identity.</p>
+          <p style="margin-top:1.2rem;"><a class="btn btn-primary" href="https://amzn.to/4u2o4Dp" target="_blank" rel="noopener noreferrer">Buy on Amazon</a></p>
+        </div>
+        <div class="card">
+          <h2>The BEP Principle (2025)<span class="dot">.</span></h2>
+          <p class="lead"><em>How the Brain Chooses Story Over Truth (and When It Doesn't)</em></p>
+          <p>Independently published · ISBN 979-8273171619</p>
+          <p style="margin-top:1rem; color:var(--muted);">Why do intelligent people believe falsehoods? At its core lies the BEP model — Belonging, Energy, and Prediction — a synthesis of neuroscience, psychology, and social science revealing how truth-seeking is not our natural state but a conditional luxury.</p>
+          <p style="margin-top:1.2rem;"><a class="btn btn-primary" href="https://a.co/d/0a0EOrI9" target="_blank" rel="noopener noreferrer">Buy on Amazon</a></p>
+        </div>
+      </section>
 
-    <section id="social" class="tab-content">
-      <div class="card">
-        <h2>Connect & Collaborate</h2>
-        <ul>
-          <li><i class="fab fa-x-twitter"></i> <a href="https://x.com/BEPframework" target="_blank" rel="noopener noreferrer">@BEPframework on X</a></li>
-          <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/nico-quiroz-md-37a589107" target="_blank" rel="noopener noreferrer">LinkedIn: Nico Quiroz, MD</a></li>
-          <li><i class="fas fa-envelope"></i> <a href="mailto:BEPframework@nicolasquirozmd.com">BEPframework@nicolasquirozmd.com</a></li>
-          <li><i class="fas fa-id-badge"></i> <a href="https://orcid.org/0009-0003-8431-0048" target="_blank" rel="noopener noreferrer">ORCID: 0009-0003-8431-0048</a></li>
-        </ul>
-        <p>Open to collaboration with plasma physicists, control engineers, materials labs, and research partners.</p>
-      </div>
-    </section>
+      <section id="patents" class="tab-content">
+        <div class="card">
+          <h2>Patent-pending inventions<span class="dot">.</span></h2>
+          <ul class="patent-list">
+            <li><i class="fas fa-lightbulb" style="color:var(--accent);margin-right:.6rem;"></i> <strong>Q108D Tokamak Simulation Platform</strong><br>Control-assisted latent-space stabilization for energy transition management — Provisional filed Jan 2026 (non-provisional April 2026)</li>
+            <li><i class="fas fa-lightbulb" style="color:var(--accent);margin-right:.6rem;"></i> Multifunctional Composite Material — <a href="https://patents.google.com/patent/US20260022228A1/en" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">US20260022228A1</a> (filed July 18, 2024)</li>
+            <li><i class="fas fa-lightbulb" style="color:var(--accent);margin-right:.6rem;"></i> Method and System for Heart Rate Variability Analysis Using Fractal and Quantum-Like Dynamics — U.S. Application No. 19/228,748 (filed June 5, 2025)</li>
+          </ul>
+          <p style="margin-top:1.2rem;color:var(--muted);">All inventions filed under Nicolas B. Quiroz, MD · U.S. applications pending</p>
+        </div>
+      </section>
 
-  </main>
+      <section id="social" class="tab-content">
+        <div class="card">
+          <h2>Connect & collaborate<span class="dot">.</span></h2>
+          <ul class="social-list">
+            <li><i class="fab fa-x-twitter" style="color:var(--accent);margin-right:.6rem;"></i> <a href="https://x.com/BEPframework" target="_blank" rel="noopener noreferrer">@BEPframework on X</a></li>
+            <li><i class="fab fa-linkedin" style="color:var(--accent);margin-right:.6rem;"></i> <a href="https://www.linkedin.com/in/nico-quiroz-md-37a589107" target="_blank" rel="noopener noreferrer">LinkedIn: Nico Quiroz, MD</a></li>
+            <li><i class="fas fa-envelope" style="color:var(--accent);margin-right:.6rem;"></i> <a href="mailto:BEPframework@nicolasquirozmd.com">BEPframework@nicolasquirozmd.com</a></li>
+            <li><i class="fas fa-id-badge" style="color:var(--accent);margin-right:.6rem;"></i> <a href="https://orcid.org/0009-0003-8431-0048" target="_blank" rel="noopener noreferrer">ORCID: 0009-0003-8431-0048</a></li>
+          </ul>
+          <p style="margin-top:1.2rem;color:var(--muted);">Open to collaboration with plasma physicists, control engineers, materials labs, and research partners.</p>
+        </div>
+      </section>
+    </main>
 
-  <footer>
-    © 2026 Nicolas Brian Quiroz, MD • IZ LLC • Advancing the Frontier
-  </footer>
+    <footer>
+      <div class="sig">Advancing the frontier</div>
+      © 2026 Nicolas Brian Quiroz, MD · IZ LLC
+    </footer>
+  </div>
 
   <script>
     function switchTab(tabName) {
-      document.querySelectorAll('nav.tabs button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('nav.tabs button[data-tab]').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(section => section.classList.remove('active'));
       const activeButton = document.querySelector(`button[data-tab="${tabName}"]`);
       if (activeButton) activeButton.classList.add('active');
       const activeSection = document.getElementById(tabName);
       if (activeSection) activeSection.classList.add('active');
+      history.replaceState(null, '', '#' + tabName);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('nav.tabs button').forEach(button => {
+      document.querySelectorAll('nav.tabs button[data-tab]').forEach(button => {
         button.addEventListener('click', () => switchTab(button.dataset.tab));
       });
+      const hash = location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) switchTab(hash);
 
       const toggle = document.querySelector('.theme-toggle');
       if (toggle) {
@@ -465,6 +559,47 @@
         });
       }
     });
+
+    /* Subtle toroidal particle field — restrained, not decorative noise */
+    (() => {
+      const c = document.getElementById('plasma');
+      const ctx = c.getContext('2d');
+      let w, h, t = 0;
+      const N = 140;
+      const pts = Array.from({length: N}, (_, i) => ({
+        a: (i / N) * Math.PI * 2,
+        b: Math.random() * Math.PI * 2,
+        s: 0.4 + Math.random() * 0.8
+      }));
+      function resize() {
+        w = c.width = innerWidth;
+        h = c.height = innerHeight;
+      }
+      addEventListener('resize', resize); resize();
+      function frame() {
+        t += 0.004;
+        ctx.clearRect(0, 0, w, h);
+        const cx = w * 0.5, cy = h * 0.38;
+        const R = Math.min(w, h) * 0.22;
+        const r = R * 0.38;
+        ctx.globalCompositeOperation = 'lighter';
+        for (const p of pts) {
+          const a = p.a + t * 0.35;
+          const b = p.b + t * p.s;
+          const x = cx + (R + r * Math.cos(b)) * Math.cos(a);
+          const y = cy + (R + r * Math.cos(b)) * Math.sin(a) * 0.42;
+          const z = r * Math.sin(b);
+          const size = 1.1 + (z / r + 1) * 1.1;
+          ctx.fillStyle = `hsla(${186 + z * 0.4}, 100%, 68%, ${0.08 + (z / r + 1) * 0.07})`;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        requestAnimationFrame(frame);
+      }
+      frame();
+    })();
   </script>
 </body>
 </html>
